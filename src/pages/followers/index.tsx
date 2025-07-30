@@ -1,0 +1,7 @@
+import react from "react";
+
+export const Followers = () => {
+  return (
+    <div>Followers</div>
+  );
+}

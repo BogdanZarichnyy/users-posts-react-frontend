@@ -5,15 +5,15 @@ import type { RootState } from "../store";
 
 const baseQuery = fetchBaseQuery({
   baseUrl: `${BASE_URL}/api`,
-  // prepareHeaders: (headers, { getState }) => {
-  //   const token = (getState() as RootState).auth.token || localStorage.getItem("token"); // достаємо токен з хедера
+  prepareHeaders: (headers, { getState }) => {
+    const token = (getState() as RootState).user.token || localStorage.getItem("token"); // достаємо токен з хедера
 
-  //   if (token) {
-  //     headers.set('authorization', `Bearer ${token}`);
-  //   }
+    if (token) {
+      headers.set('authorization', `Bearer ${token}`);
+    }
 
-  //   return headers;
-  // }
+    return headers;
+  }
 });
 
 const baseQueryWithRetry = retry(baseQuery, { maxRetries: 1 }); // якщо буде 0, то повторний запит не буде здійснено

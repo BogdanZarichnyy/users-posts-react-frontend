@@ -1,5 +1,5 @@
 import { useGetAllPostsQuery } from "../../app/services/postsApi";
-import { Card } from "../../components/card/card";
+import { Card } from "../../components/card";
 import { CreatePost } from "../../components/create-post";
 
 export const Posts = () => {

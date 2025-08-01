@@ -1,7 +1,7 @@
 import react from "@vitejs/plugin-react"
-// import * as path from "node:path"
+import * as path from "node:path"
 // import { defineConfig } from "vitest/config"
-// import packageJson from "./package.json" with { type: "json" }
+import packageJson from "./package.json" with { type: "json" }
 import { defineConfig } from 'vite'
 import tailwindcss from '@tailwindcss/vite'
 
@@ -12,28 +12,27 @@ export default defineConfig({
     tailwindcss(),
   ],
 
-  // server: {
-  //   open: true,
-  // },
+  server: {
+    open: true,
+  },
 
-  // resolve: {
-  //   alias: {
-  //     "@": path.resolve(__dirname, "./src"),
-  //   },
-  // },
+  build: {
+    outDir: 'build',
+    sourcemap: true
+  },
 
-  // test: {
-  //   root: import.meta.dirname,
-  //   name: packageJson.name,
-  //   environment: "jsdom",
+  test: {
+    root: import.meta.dirname,
+    name: packageJson.name,
+    environment: "jsdom",
 
-  //   typecheck: {
-  //     enabled: true,
-  //     tsconfig: path.join(import.meta.dirname, "tsconfig.json"),
-  //   },
+    typecheck: {
+      enabled: true,
+      tsconfig: path.join(import.meta.dirname, "tsconfig.json"),
+    },
 
-  //   globals: true,
-  //   watch: false,
-  //   setupFiles: ["./src/setupTests.ts"],
-  // },
+    globals: true,
+    watch: false,
+    setupFiles: ["./src/setupTests.ts"],
+  },
 })

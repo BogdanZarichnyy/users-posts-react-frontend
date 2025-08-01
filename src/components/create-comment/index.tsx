@@ -1,12 +1,15 @@
-import { useCreatePostMutation, useLazyGetAllPostsQuery } from "../../app/services/postsApi";
+import { useLazyGetPostByIdQuery } from "../../app/services/postsApi";
 import { Controller, useForm } from "react-hook-form";
 import { Button, Textarea } from "@heroui/react";
 import { ErrorMessage } from "../error-message";
 import { IoMdCreate } from "react-icons/io";
+import { useParams } from "react-router-dom";
+import { useCreateCommentMutation } from "../../app/services/commentsApi";
 
-export const CreatePost = () => {
-  const [createPost] = useCreatePostMutation();
-  const [triggerAllPosts] = useLazyGetAllPostsQuery();
+export const CreateComment = () => {
+  const { id } = useParams<{ id: string }>();
+  const [createComment] = useCreateCommentMutation();
+  const [getPostById] = useLazyGetPostByIdQuery();
 
   const { 
     handleSubmit,
@@ -19,9 +22,11 @@ export const CreatePost = () => {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      await createPost({ content: data.post }).unwrap();
-      setValue('post', '');
-      await triggerAllPosts().unwrap();
+      if (id) {
+        await createComment({ content: data.comment, postId: id }).unwrap();
+        setValue('comment', '');
+        await getPostById(id).unwrap();
+      }
     } catch (error) {
       console.log(error);
     }
@@ -30,7 +35,7 @@ export const CreatePost = () => {
   return (
     <form className="flex-grow" onSubmit={onSubmit}>
       <Controller 
-        name="post"
+        name="comment"
         control={control}
         defaultValue=''
         rules={{
@@ -40,7 +45,7 @@ export const CreatePost = () => {
           <Textarea 
             { ...field }
             labelPlacement='outside'
-            placeholder="Про що думаєте?"
+            placeholder="Напишіть свій коментарій"
             className="mb-5"
           />
         )}
@@ -49,12 +54,12 @@ export const CreatePost = () => {
         errors && <ErrorMessage error={error} />
       }
       <Button
-        color='success'
+        color='primary'
         className="flex-end"
         endContent={<IoMdCreate />}
         type='submit'
       >
-        Додати пост
+        Відповісти
       </Button>
     </form>
   );

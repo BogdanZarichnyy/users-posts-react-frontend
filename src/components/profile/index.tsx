@@ -5,7 +5,6 @@ import { BASE_URL } from "../../constans";
 import { Link } from "react-router-dom";
 import { MdAlternateEmail } from "react-icons/md";
 
-
 export const Profile = () => {
   const current = useSelector(selectCurrent);
 

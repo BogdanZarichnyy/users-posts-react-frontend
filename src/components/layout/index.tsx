@@ -22,17 +22,13 @@ export const Layout = () => {
     <>
       <Header />
       <Container>
-        {/* <div className="flex-2 p-4"> */}
         <div className="flex-1 p-4">
           <NavBar />
         </div>
-        {/* <div className="flex-1 p-4"> */}
         <div className="flex-4 p-4">
           <Outlet />
         </div>
-        {/* <div className="flex-2 p-4"> */}
         <div className="flex-1 p-4">
-        {/* <div className={`${!user && "flex-1 p-4"}`}> */}
           <div className="flex-col flex gap-5">{!user && <Profile />}</div>
         </div>
       </Container>

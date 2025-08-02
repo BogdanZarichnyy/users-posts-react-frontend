@@ -25,7 +25,7 @@ export const UserProfile = () => {
   const [triggerCurrentQuery] = useLazyCurrentQuery();
   const dispatch = useDispatch();
 
-  useEffect(() => {
+  useEffect(() => () => {
     dispatch(resetUser());
   }, []);
 

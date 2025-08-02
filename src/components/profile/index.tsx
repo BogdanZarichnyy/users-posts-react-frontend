@@ -18,13 +18,13 @@ export const Profile = () => {
     <Card className="py-4 w-[302px]">
       <CardHeader className="pb-0 pt-2 px-4 flex-col items-center">
         <Image 
-          alt='Card prodile'
+          alt='Card profile'
           className="object-cover rounded-xl"
           src={`${BASE_URL}${avatarUrl}`}
           width={370}
         />
       </CardHeader>
-      <CardBody>
+      <CardBody className="overflow-visible py-2">
         <Link to={`/users/${id}`}>
           <h4 className="font-bold text-large mb-2">{name}</h4>
         </Link>
